@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Febbox Token Extractor",
+  "version": "1.0.0",
+  "description": "Extracts your Febbox session token from the ui cookie and displays it for easy copying. No data is sent anywhere.",
+  "permissions": ["cookies"],
+  "host_permissions": [
+    "https://febbox.com/*",
+    "https://www.febbox.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Febbox Token Extractor"
+  }
+}
