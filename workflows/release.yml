@@ -1,0 +1,36 @@
+name: Build Febbox Token Extractor
+
+on:
+  release:
+    types: [created]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create MV2 ZIP
+        run: |
+          cd mv2-version
+          zip -r ../febbox-token-extractor-mv2-${{ github.event.release.tag_name }}.zip . \
+          -x ".git/*" \
+          -x ".github/*"
+
+      - name: Create MV3 ZIP
+        run: |
+          cd mv3-version
+          zip -r ../febbox-token-extractor-mv3-${{ github.event.release.tag_name }}.zip . \
+          -x ".git/*" \
+          -x ".github/*"
+
+      - name: Upload ZIPs to release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            febbox-token-extractor-mv2-${{ github.event.release.tag_name }}.zip
+            febbox-token-extractor-mv3-${{ github.event.release.tag_name }}.zip
